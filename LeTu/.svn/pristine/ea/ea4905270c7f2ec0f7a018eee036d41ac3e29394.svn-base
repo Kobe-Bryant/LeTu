@@ -1,0 +1,98 @@
+//
+//  MyselfDetailPhotoCell.m
+//  LeTu
+//
+//  Created by DT on 14-5-20.
+//
+//
+
+#import "MyselfDetailPhotoCell.h"
+
+@interface MyselfDetailPhotoCell()
+@property(nonatomic,strong)UIImageView *arrowImage;
+@property(nonatomic,strong)UIImageView *lineImage;
+@property(nonatomic,strong)UIImageView *PhotoImage1;
+@property(nonatomic,strong)UIImageView *PhotoImage2;
+@property(nonatomic,strong)UIImageView *PhotoImage3;
+@end
+
+@implementation MyselfDetailPhotoCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+        self.keyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.keyLabel.backgroundColor = [UIColor clearColor];
+        self.keyLabel.textColor = [UIColor grayColor];
+        self.keyLabel.font = [UIFont systemFontOfSize:15.0f];
+        self.keyLabel.text = @"最新照片";
+        [self addSubview:self.keyLabel];
+        
+        self.lineImage = [[UIImageView alloc] initWithFrame:CGRectZero];
+        self.lineImage.image = [UIImage imageNamed:@"posting_line"];
+        self.lineImage.alpha = 0.8;
+        [self addSubview:self.lineImage];
+        
+        self.arrowImage = [[UIImageView alloc] initWithFrame:CGRectZero];
+        self.arrowImage.image = [UIImage imageNamed:@"me_headphoto_copy_icon"];
+        [self addSubview:self.arrowImage];
+        
+        self.PhotoImage1 = [[UIImageView alloc] initWithFrame:CGRectMake(80, 10, 50, 50)];
+//        self.PhotoImage1.image = [UIImage imageNamed:@"me_headphoto"];
+        [self addSubview:self.PhotoImage1];
+        
+        self.PhotoImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(155, 10, 50, 50)];
+//        self.PhotoImage2.image = [UIImage imageNamed:@"location_pic"];
+        [self addSubview:self.PhotoImage2];
+        
+        self.PhotoImage3 = [[UIImageView alloc] initWithFrame:CGRectMake(230, 10, 50, 50)];
+//        self.PhotoImage3.image = [UIImage imageNamed:@"location_picBubble"];
+        [self addSubview:self.PhotoImage3];
+    }
+    return self;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+}
+
+- (void)layoutSubviews
+{
+    self.backgroundColor = [UIColor whiteColor];
+    if (iOS_7_Above) {
+        self.keyLabel.frame = CGRectMake(5, (self.frame.size.height-30)/2, 60, 30);
+    }else{
+        self.keyLabel.frame = CGRectMake(15, (self.frame.size.height-30)/2, 60, 30);
+    }
+    self.arrowImage.frame = CGRectMake(300, (self.frame.size.height-13)/2, 9, 13);
+    self.lineImage.frame = CGRectMake(10, self.frame.size.height-1, 300, 1);
+}
+- (void)setPhotosArray:(NSArray *)photosArray
+{
+    if ([photosArray count]==1) {
+//        self.PhotoImage1.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:0]]];
+        [self.PhotoImage1 setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:0]]] placeholderImage:PLACEHOLDER];
+//        self.PhotoImage1.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.2];
+    }else if ([photosArray count]==2){
+//        self.PhotoImage1.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:0]]];
+//        self.PhotoImage1.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.2];
+//        self.PhotoImage2.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:1]]];
+        [self.PhotoImage1 setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:0]]] placeholderImage:PLACEHOLDER];
+        [self.PhotoImage1 setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:1]]] placeholderImage:PLACEHOLDER];
+//        self.PhotoImage2.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.2];
+    }else if ([photosArray count] >=3){
+//        self.PhotoImage1.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:0]]];
+//        self.PhotoImage1.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.2];
+//        self.PhotoImage2.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:1]]];
+//        self.PhotoImage2.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.2];
+//        self.PhotoImage3.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:2]]];
+//        self.PhotoImage3.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.2];
+        [self.PhotoImage1 setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:0]]] placeholderImage:PLACEHOLDER];
+        [self.PhotoImage2 setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:1]]] placeholderImage:PLACEHOLDER];
+        [self.PhotoImage3 setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVERImageURL, [photosArray objectAtIndex:2]]] placeholderImage:PLACEHOLDER];
+    }
+}
+@end
